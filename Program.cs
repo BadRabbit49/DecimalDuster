@@ -15,10 +15,10 @@ namespace DecimalDuster {
 					Console.WriteLine("Sorry, I didn't understand you there, do you want to continue? Yes or no?");
 				} else {
 					UserInput();
-					Console.WriteLine("Do you wish to continue or quit?");
+					Console.WriteLine("New file was successfully created!");
 				}
+				Console.WriteLine("Do you wish to continue or quit?");
 				repeats = Console.ReadLine()?.ToLowerInvariant() ?? "no";
-				running = positives.Contains(repeats);
 				if (positives.Contains(repeats)) {
 					Console.WriteLine("Okay, let's go again!");
 					continue;
@@ -46,9 +46,12 @@ namespace DecimalDuster {
 					reader = File.OpenText(path);
 					string[] full = path.Split('\\');
 					name = full.Last().Insert(0, "rounded_");
-					Console.WriteLine("How many decimals do you want to round to?");
-					if (!int.TryParse(Console.ReadLine(), out decimalPlacesTo)) {
-						decimalPlacesTo = 4;
+					while (true) {
+						Console.WriteLine("How many decimals do you want to round to?");
+						if (int.TryParse(Console.ReadLine(), out decimalPlacesTo)) {
+							break;
+						}
+						Console.WriteLine("Please provide a real number! (1-99)");
 					}
 					break;
 				}
@@ -85,8 +88,7 @@ namespace DecimalDuster {
 			return result;
 		}
 
-		static bool running = true;
-		static string[] positives = new string[] { "yes", "sure", "y", "go ahead", "again", "continue", "1", "da", "affirmative", "im gay" };
-		static string[] negatives = new string[] { "no", "nope", "n", "not really", "no more", "this sucks", "yeet", "fuck off", "bye" };
+		static string[] positives = new string[] { "yes", "sure", "y", "go ahead", "again", "continue", "1", "da", "affirmative", "im gay", "go", "heavy eat sandvich" };
+		static string[] negatives = new string[] { "no", "nope", "n", "not really", "no more", "this sucks", "yeet", "fuck off", "bye", "quit", "stop", "nyet" };
 	}
 }
